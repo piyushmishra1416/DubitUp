@@ -18,6 +18,7 @@ app.get('/blob', async (req, res) => {
     // Extract the text from the transcript and concatenate into a single string
     const transcriptText = transcript.map((segment) => segment.text).join(' ');
     console.log('Transcript text:',);
+    const data = "hello how you are doing?"
 
     // Convert text to speech using Hugging Face Inference API
     const response = await fetch(
@@ -25,11 +26,15 @@ app.get('/blob', async (req, res) => {
 			{
 				headers: { Authorization: "Bearer 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" },
 				method: "POST",
-				body: JSON.stringify(transcriptText),
+				body: JSON.stringify(data),
+        responseType: "arraybuffer" 
 			}
 		);
-			const result = await response.blob();
-    res.send(result);
+    const arrayBuffer = await response.arrayBuffer();
+    
+    // Set the content type header
+    res.setHeader("Content-Type", "audio/mpeg"); // Assuming the response is audio
+    res.send(Buffer.from(arrayBuffer));
   } catch (error) {
     console.error('Error occurred:', error.message);
     res.status(500).send('Error fetching transcript or generating speech');

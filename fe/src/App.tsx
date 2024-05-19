@@ -13,25 +13,33 @@ function App() {
   // });
   // console.log('Text-to-speech response:', ttsResponse);
 
-  async function query(data: any) {
-		const response = await fetch(
-			"https://api-inference.huggingface.co/models/facebook/mms-tts-fra",
-			{
-				headers: { Authorization: "Bearer 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" },
-				method: "POST",
-				body: JSON.stringify(data),
-			}
-		);
-			const result = await response.blob();
-			return result;
-		}
+  // async function query(data: any) {
+	// 	const response = await fetch(
+	// 		"https://api-inference.huggingface.co/models/facebook/mms-tts-fra",
+	// 		{
+	// 			headers: { Authorization: "Bearer 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" },
+	// 			method: "POST",
+	// 			body: JSON.stringify(data),
+	// 		}
+	// 	);
+	// 		const result = await response.blob();
+	// 		return result;
+	// 	}
 
   const fetchAudio = async () => {
     try {
-      const data = { "inputs": "The answer to the universe is 42" };
-      const response = await query(data)
-      console.log('Response:', response); // Fetch the audio from the backend
-      const url = URL.createObjectURL(response); // Create a URL for the blob
+      const response = await fetch(`http://localhost:3000/blob`, {
+        method: 'GET',
+      });
+      console.log('Response:', response); 
+      console.log(response.headers)// Fetch the audio from the backend
+      const result = await response.blob();
+      console.log("---", result)
+      const contentType = response.headers.get('Content-Type');
+      console.log('Content-Type:', contentType);
+// @ts-ignore
+      const url = URL.createObjectURL(result); // Create a URL for the blob
+      console.log("---", url)
 
       setAudioUrl(url); // Set the audio URL
     } catch (error) {
