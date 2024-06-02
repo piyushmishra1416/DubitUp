@@ -15,6 +15,7 @@
     "cors": "^2.8.5",
     "express": "^4.19.2",
     "fetch-blob": "^4.0.0",
+    "translate-api": "^0.3.18",
     "youtube-transcript": "^1.2.1"
   }
 }
