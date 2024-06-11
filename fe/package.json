@@ -12,6 +12,7 @@
   "dependencies": {
     "@huggingface/inference": "^2.7.0",
     "axios": "^1.6.8",
+    "chrome-types": "^0.1.287",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "types": "^0.1.1",

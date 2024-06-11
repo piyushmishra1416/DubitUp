@@ -3,18 +3,13 @@
    "name": "YouTube Video Time Extractor",
    "version": "1.0",
    "description": "Extracts the current playing time of a YouTube video.",
-   "permissions": ["activeTab", "scripting"],
-   "background": {
-     "service_worker": "src/background.ts"
-   },
+   "permissions": ["activeTab", "scripting", "storage", "tabs"],
+   "host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
    "action": {
      "default_popup": "index.html"
-   },
-   "content_scripts": [
-     {
-       "matches": ["https://www.youtube.com/*"],
-       "js": ["src/content.ts"]
-     }
-   ]
+   }
  }
  
